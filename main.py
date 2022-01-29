@@ -29,7 +29,7 @@ def print_arg_help():
         '\n\t--last\t\t->\tRequest the last X transactions (default: ' + str(api_max_tr) + ')'
         '\n\t--token\t\t->\tSpecify your API token (default: "' + api_token + '")'
         '\n\t--top\t\t->\tShow the top X most used addresses (default: ' + str(show_me_top) + ')\n'
-        '\nYou can also use the config.ini file, but keep in mind that CLI arguments have higher priority.'
+        '\nYou can also use the config.ini file, but keep in mind that CLI arguments have higher priority.\n\n'
     )
 
 def parse_arguments():
