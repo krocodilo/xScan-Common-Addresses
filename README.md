@@ -4,7 +4,8 @@ Piece of software to help analyse the history of a certain blockchain address us
 
 It finds addresses used more than once, for transactions going both In and Out. 
 
-
+## Usage
+```
 Usage:  <executable> <address> [options]
 Options:
         -h              ->      Print this help menu
@@ -14,3 +15,4 @@ Options:
         --top           ->      Show the top X most used addresses (default: 10)
 
 You can also use the config.ini file, but keep in mind that CLI arguments have higher priority.
+```
