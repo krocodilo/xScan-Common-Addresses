@@ -1,8 +1,8 @@
 
-import json
-from queue import Empty
 from sys import argv
+from configparser import ConfigParser
 from getopt import getopt, GetoptError
+
 
 from connection import api_get    #connection.py in same folder
 
@@ -26,21 +26,37 @@ def print_arg_help():
         '\nOptions:'
         '\n\t-h\t\t->\tPrint this help menu'
         '\n\t--hostname\t->\tSpecify the hostname of the API server (default: "' + url_hostname + '")'
-        '\n\t--token\t\t->\tSpecify your API token (default: "' + API_token + '")\n\n'
+        '\n\t--last\t\t->\tRequest the last X transactions (default: ' + str(api_max_tr) + ')'
+        '\n\t--token\t\t->\tSpecify your API token (default: "' + api_token + '")'
+        '\n\t--top\t\t->\tShow the top X most used addresses (default: ' + str(show_me_top) + ')\n'
+        '\nYou can also use the config.ini file, but keep in mind that CLI arguments have higher priority.'
     )
 
 def parse_arguments():
-    global url_hostname, API_token, address
+    global url_hostname, api_token, address, show_me_top, api_max_tr
+
+    conf = ConfigParser()
+    if len(conf.read("config.ini")) > 0:
+        if conf.has_option("config", "url_hostname"): url_hostname = conf.get("config", "url_hostname")
+        if conf.has_option("config", "api_token"): api_token = conf.get("config", "api_token")
+        if conf.has_option("config", "address"): address = conf.get("config", "address")
+        if conf.has_option("config", "api_max_transactions"): api_max_tr = conf.getint("config", "api_max_transactions")
+        if conf.has_option("config", "show_me_top"): show_me_top = conf.getint("config", "show_me_top")
 
     try:
         address = argv[1]
-        opts, args = getopt(argv[2:], "h:", ["hostname=", "token="])
+        opts, args = getopt(argv[2:], "h:", ["hostname=", "token=", "top=", "last="])
 
         for opt, arg in opts:
             if opt == '--hostname':
                 url_hostname = arg
+            elif opt == '--last':
+                api_max_tr = arg
             elif opt == '--token':
-                API_token = arg
+                api_token = arg
+            elif opt == '--top':
+                show_me_top = arg
+
     except GetoptError as e:
         print("\nError: ", e)
         exit()
@@ -110,3 +126,5 @@ if __name__ == '__main__':
     #     print("\n\nError")
     #     print(str(e) + '\\\\\\\n' + traceback.format_exc(5) + '///\n')
     #     exit()
+
+    print()
