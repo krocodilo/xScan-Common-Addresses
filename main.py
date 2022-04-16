@@ -51,11 +51,11 @@ def parse_arguments():
             if opt == '--hostname':
                 url_hostname = arg
             elif opt == '--last':
-                api_max_tr = arg
+                api_max_tr = int(arg)
             elif opt == '--token':
                 api_token = arg
             elif opt == '--top':
-                show_me_top = arg
+                show_me_top = int(arg)
 
     except GetoptError as e:
         print("\nError: ", e)
