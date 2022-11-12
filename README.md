@@ -1,4 +1,4 @@
-# xScan_Duplicate_Finder
+# xScan_Common_Addresses
 
 Piece of software to help analyse the history of a certain blockchain address using the APIs of online platforms such as [etherscan.io](https://docs.etherscan.io), [bscscan.com](https://docs.bscscan.com) and others in the same family.
 
